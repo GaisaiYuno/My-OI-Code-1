@@ -1,0 +1,81 @@
+正在比较文件 10.out 和 10.ANS
+***** 10.out
+YES
+YES
+YES
+YES
+NO
+***** 10.ANS
+YES
+NO
+NO
+NO
+NO
+*****
+
+***** 10.out
+YES
+YES
+YES
+NO
+***** 10.ANS
+YES
+NO
+*****
+
+***** 10.out
+NO
+YES
+NO
+***** 10.ANS
+NO
+NO
+*****
+
+***** 10.out
+NO
+YES
+NO
+YES
+YES
+YES
+NO
+***** 10.ANS
+NO
+NO
+*****
+
+***** 10.out
+NO
+YES
+YES
+YES
+YES
+YES
+NO
+***** 10.ANS
+NO
+NO
+*****
+
+***** 10.out
+NO
+YES
+***** 10.ANS
+NO
+NO
+NO
+NO
+NO
+NO
+NO
+NO
+NO
+NO
+NO
+NO
+NO
+NO
+NO
+*****
+
