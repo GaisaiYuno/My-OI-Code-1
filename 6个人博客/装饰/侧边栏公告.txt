@@ -1,0 +1,18 @@
+<div class="right floated five wide column">  
+        <div class="ui bottom attached center aligned segment">
+          <div class="ui centered inline loader" id="hitokoto-loader"></div>
+          <script>
+          $.get('https://sslapi.hitokoto.cn/?c=a', function (data) {
+            if (typeof data === 'string') data = JSON.parse(data);
+            $('#hitokoto-loader').removeClass('active');
+            $('#hitokoto-content').css('display', '').text(data.hitokoto);
+            if (data.from) {
+              $('#hitokoto-from').css('display', '').text('¡ª¡ª' + data.from);
+            }
+          });
+          </script>
+          <div style="font-size: 1em; line-height: 1.5em;" id="hitokoto-content"></div>
+          <div style="text-align: right; margin-top: 15px; font-size: 0.9em; color: rgb(102, 102, 102);" id="hitokoto-from"></div>
+  </div>
+
+<img alt="" src="https://ipcounter.ihcr.top/?mode=1 width="230px" height="100.3px">
