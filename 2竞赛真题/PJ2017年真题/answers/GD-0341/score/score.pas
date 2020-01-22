@@ -1,0 +1,13 @@
+var
+a,b,c:real;
+begin
+assign(input,'score.in');reset(input);
+assign(output,'score.out');rewrite(output);
+readln(a,b,c);
+        a:=(a*20)/100;
+        b:=(b*30)/100;
+        c:=(c*50)/100;
+writeln(a+b+c:0:0);
+close(input);
+close(output);
+end.

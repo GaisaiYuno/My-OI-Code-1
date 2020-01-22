@@ -1,0 +1,15 @@
+var
+        a,b,c:longint;
+        ans1,ans2,ans3,lxn:real;
+begin
+        assign(input,'score.in');reset(input);
+        assign(output,'score.out');rewrite(output);
+        read(a,b,c);
+        ans1:=a*0.2;
+        ans2:=b*0.3;
+        ans3:=c*0.5;
+        lxn:=ans1+ans2+ans3;
+        write(lxn:0:0);
+        close(input);
+        close(output);
+end.

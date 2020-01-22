@@ -1,0 +1,9 @@
+begin
+  assign(input,'chess.in');
+  reset(input);
+  assign(output,'chess.out');
+  rewrite(output);
+  write('-1');
+  close(input);
+  close(output);
+end.

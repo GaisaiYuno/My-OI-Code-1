@@ -1,0 +1,97 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+using namespace std;
+int main()
+{
+	freopen("chess.in","r",stdin);
+	freopen("chess.out","w",stdout);
+	long magic[110][110],color[110][110],cost[110][110],m,n,i,o,x,y,col,most,left,up;
+	cin>>m>>n;
+	for(i=0;i<=m;i++)
+	{
+		for(o=0;o<=m;o++)
+		{
+			color[i][o]=-1;
+			cost[i][o]=999999999;
+			magic[i][o]=1;
+		}
+		cost[1][1]=0;
+	}
+	for(i=1;i<=n;i++)
+	{
+		cin>>x>>y>>col;
+		color[x][y]=col; 
+	}
+	for(most=1;most<=m;most++)
+	{
+		for(i=most;i<=m;i++)
+		{
+			if(most!=1||i!=1)
+			{
+				left=cost[most-1][i];
+				up=cost[most][i-1];
+				if(color[most][i]==-1)
+				{
+					if(magic[most-1][i]==0)left=999999999;
+					if(magic[most][i-1]==0)up=999999999;
+					left++;up++;
+					magic[most][i]=0;
+				}
+				if(color[most][i]!=color[most-1][i]&&color[most-1][i]!=2)left++;
+				if(color[most][i]!=color[most][i-1]&&color[most][i-1]!=2)up++;
+				if(left<up)
+				{
+					cost[most][i]=left;
+					if(color[most][i]==-1)color[most][i]=color[most-1][i];
+				}
+				if(left>up)
+				{
+					cost[most][i]=up;
+					if(color[most][i]==-1)color[most][i]=color[most][i-1];
+				}
+				if(left==up)
+				{
+					cost[most][i]=up;
+					if(color[most][i]==-1&&color[most-1][i]!=color[most][i-1]&&(color[most-1][i]==1||color[most-1][i]==0)&&(color[most][i-1]==1||color[most][i-1]==0))color[most][i]=2;
+				}
+			}
+		}
+		for(i=most;i<=m;i++)
+		{
+			if(most!=1||i!=1)
+			{
+				left=cost[i-1][most];
+				up=cost[i][most-1];
+				if(color[i][most]==-1)
+				{
+					if(magic[i-1][most]==0)left=999999999;
+					if(magic[i][most-1]==0)up=999999999;
+					left++;up++;
+					magic[i][most]=0;
+				}
+				if(color[i][most]!=color[i-1][most])left++;
+				if(color[i][most]!=color[i][most-1])up++;
+				if(left<up)
+				{
+					cost[i][most]=left;
+					if(color[i][most]==-1)color[i][most]=color[i-1][most];
+				}
+				if(left>up)
+				{
+					cost[i][most]=up;
+					if(color[i][most]==-1)color[i][most]=color[i][most-1];
+				}
+				if(left==up)
+				{
+					cost[i][most]=up;
+					if(color[i][most]==-1&&color[i-1][most]!=color[i][most-1]&&(color[i-1][most]==1||color[i-1][most]==0)&&(color[i][most-1]==1||color[i][most-1]==0))color[i][most]=2;
+				}
+			}
+		}
+	}
+	if(cost[m][m]>=999999999)cout<<"-1";else cout<<cost[m][m];
+	fclose(stdin);
+	fclose(stdout);
+	return 0;
+}

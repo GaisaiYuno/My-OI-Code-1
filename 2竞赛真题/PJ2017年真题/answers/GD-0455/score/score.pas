@@ -1,0 +1,14 @@
+var
+        i,j,k:longint;
+        s:real;
+begin
+assign(input,'score.in');
+assign(output,'score.out');
+reset(input);
+rewrite(output);
+        readln(i,j,k);
+        s:=i*0.2+j*0.3+k*0.5;
+        writeln(s:0:0);
+close(input);
+close(output);
+end.

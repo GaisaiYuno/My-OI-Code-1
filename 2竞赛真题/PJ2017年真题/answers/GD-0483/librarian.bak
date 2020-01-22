@@ -1,0 +1,25 @@
+var
+ a:array[0..1000000] of longint;
+ n,p,m,i,j,k:longint;
+begin
+        readln(n,p);
+        for i:=1 to 1000000 do
+         a[i]:=-1;
+        for i:=1 to n do
+         begin
+                m:=0;
+                k:=1;
+                readln(m);
+                for j:=1 to 9 do
+                 begin
+                        if (a[m mod k]>m) or (a[m mod k]=0) then a[m mod k]:=m;
+                        k:=k*10;
+                 end;
+         end;
+        for i:=1 to p do
+         begin
+                read(m);
+                readln(m);
+                writeln(a[m]);
+         end;
+end.

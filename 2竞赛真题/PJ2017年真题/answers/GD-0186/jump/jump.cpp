@@ -1,0 +1,85 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+int n,m,k,a[10001],max1,max2,o,l,r,x,y,g,max3,l1,r1;
+long long t,s;
+int main()
+{
+	//freopen("jump.in","r",stdin);
+	//freopen("jump.out","w",stdout);
+	cin>>n>>m>>t;
+	for(int i=1;i<=n;i++)
+	{
+		cin>>x>>y;
+		a[x]=y;
+		max2=max(x,max2);
+		if(y>0)
+		s+=y;
+	}	
+	if(s<k)
+	{
+		cout<<-1;
+		return 0;
+	}
+	s=0;
+	l1=0;
+	r1=500000;
+	while(l1+2<=r1)
+	{
+		k=0;
+		o=0;
+		g=(l1+r1)/2;
+		s=0;
+		while(k<=max2)
+		{
+			o=0;
+			if(g<m)
+			l=m-g+k;
+			else
+			l=k+1;
+		    r=m+g+k;
+		    max1=-100001;
+			while(l<=r)
+			{
+				if(a[l]>0)
+				{
+					k=l;
+					o=1;
+					s+=a[l];
+				    break;
+				}
+				if(a[l]<0)
+				{
+					if(a[l]>max1)
+					{
+						max1=a[l];
+						max3=l;
+					}
+				}
+				l++;
+			}
+			if(o==1)
+			if(s>=t)
+			{
+				r1=g-1;
+				break;
+			}
+			if(o!=1&&max1==-100001)
+			{
+				l1=g;
+			    break;
+			}
+			if(o!=1&&max1!=-100001)
+			{
+				k=max3;
+				s+=max1;
+			}
+			if(k==max2&&s<k)
+			{
+				l1=g;
+				break;
+			}
+	    }
+	}
+	cout<<g;
+}

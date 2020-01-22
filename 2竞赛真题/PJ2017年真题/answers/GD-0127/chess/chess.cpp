@@ -1,0 +1,140 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<cstring>
+#include<string>
+using namespace std;
+int gg[110][110],ans[110][110],gg2[110][110][5];
+bool check[110][110];
+int main()
+{
+	freopen("chess.in","r",stdin);
+	freopen("chess.out","w",stdout);
+	int m,n,x,y,c;
+	cin>>n>>m;
+	memset(check,false,sizeof(check));
+	memset(gg,false,sizeof(gg));
+	for(int i=1;i<=m;i++)
+	{
+		cin>>x>>y>>c;
+		if(c==1)
+		gg[x][y]=1;
+		else
+		gg[x][y]=2;
+	}
+	for(int i=1;i<=n;i++)
+		for(int j=1;j<=n;j++)
+		{
+			ans[i][j]=300000;
+			gg2[i][j][1]=300000;
+			gg2[i][j][2]=300000;
+		}
+	ans[1][1]=0;
+	check[1][1]=true;
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=n;j++)
+		{
+			if(check[i][j]==false)
+			continue;
+			if(gg[i][j]==1)
+			{
+				if(gg[i][j+1]==0)
+				{
+					check[i][j+1]=true;
+					gg2[i][j+1][1]=min(gg2[i][j+1][1],ans[i][j]+2);
+					ans[i][j+1]=min(ans[i][j+1],gg2[i][j+1][1]);
+				}
+				if(gg[i][j+1]==1)
+				{
+					check[i][j+1]=true;
+					ans[i][j+1]=min(ans[i][j+1],ans[i][j]);
+				}
+				if(gg[i][j+1]==2)
+				{
+					check[i][j+1]=true;
+					ans[i][j+1]=min(ans[i][j+1],ans[i][j]+1);
+				}
+				if(gg[i+1][j]==0)
+				{
+					check[i+1][j]=true;
+					gg2[i+1][j][1]=min(gg2[i+1][j][1],ans[i][j]+2);
+					ans[i+1][j]=min(ans[i+1][j],gg2[i+1][j][1]);
+				}
+				if(gg[i+1][j]==1)
+				{
+					check[i+1][j]=true;
+					ans[i+1][j]=min(ans[i+1][j],ans[i][j]);
+				}
+				if(gg[i+1][j]==2)
+				{
+					check[i+1][j]=true;
+					ans[i+1][j]=min(ans[i+1][j],ans[i][j]+1);
+				}		
+			}
+			if(gg[i][j]==2)
+			{
+				if(gg[i][j+1]==0)
+				{
+					check[i][j+1]=true;
+					gg2[i][j+1][2]=min(gg2[i][j+1][2],ans[i][j]+2);
+					ans[i][j+1]=min(ans[i][j+1],gg2[i][j+1][2]);
+				}
+				if(gg[i][j+1]==2)
+				{
+					check[i][j+1]=true;
+					ans[i][j+1]=min(ans[i][j+1],ans[i][j]);
+				}
+				if(gg[i][j+1]==1)
+				{
+					check[i][j+1]=true;
+					ans[i][j+1]=min(ans[i][j+1],ans[i][j]+1);
+				}
+				if(gg[i+1][j]==0)
+				{
+					check[i+1][j]=true;
+					gg2[i+1][j][2]=min(gg2[i+1][j][2],ans[i][j]+2);
+					ans[i+1][j]=min(ans[i+1][j],gg2[i+1][j][2]);
+				}
+				if(gg[i+1][j]==2)
+				{
+					check[i+1][j]=true;
+					ans[i+1][j]=min(ans[i+1][j],ans[i][j]);
+				}
+				if(gg[i+1][j]==1)
+				{
+					check[i+1][j]=true;
+					ans[i+1][j]=min(ans[i+1][j],ans[i][j]+1);
+				}
+			}
+			if(gg[i][j]==0)
+			{
+				if(gg[i][j+1]==2)
+				{
+					check[i][j+1]=true;
+					ans[i][j+1]=min(gg2[i][j][1]+1,min(gg2[i][j][2],ans[i][j+1]));
+				}
+				else if(gg[i][j+1]==1)
+				{
+					check[i][j+1]=true;
+					ans[i][j+1]=min(gg2[i][j][2]+1,min(gg2[i][j][1],ans[i][j+1]));
+				}
+				if(gg[i+1][j]==2)
+				{
+					check[i+1][j]=true;
+					ans[i+1][j]=min(gg2[i][j][1]+1,min(gg2[i][j][2],ans[i+1][j]));
+				}
+				else if(gg[i+1][j]==1)
+				{
+					check[i+1][j]=true;
+					ans[i+1][j]=min(gg2[i][j][2]+1,min(gg2[i][j][1],ans[i+1][j]));
+				}
+			}
+		}
+	}
+	if(check[n][n]==false)
+	cout<<-1;
+	else
+	cout<<ans[n][n];
+	return 0;	
+}

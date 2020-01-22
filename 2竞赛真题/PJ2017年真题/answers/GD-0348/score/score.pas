@@ -1,0 +1,17 @@
+var
+  x,y,z,sum:longint;
+  x1,y1,z1:real;
+begin
+  assign(input,'score.in');
+  reset(input);
+  assign(output,'score.out');
+  rewrite(output);
+  readln(x1,y1,z1);
+  x:=trunc(x1*0.2);
+  y:=trunc(y1*0.3);
+  z:=trunc(z1*0.5);
+  sum:=x+y+z;
+  writeln(sum);
+  close(input);
+  close(output);
+end.

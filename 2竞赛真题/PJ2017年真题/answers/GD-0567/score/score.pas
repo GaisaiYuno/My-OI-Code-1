@@ -1,0 +1,14 @@
+var
+        a,b,c:longint;
+        a1,b1,c1:extended;
+begin
+        assign(input,'score.in');reset(input);
+        assign(output,'score.out');rewrite(output);
+        readln(a,b,c);
+        a1:=a*0.2;
+        b1:=b*0.3;
+        c1:=c*0.5;
+        writeln(a1+b1+c1:0:0);
+        close(input);
+        close(output);
+end.

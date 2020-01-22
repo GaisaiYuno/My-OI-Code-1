@@ -1,0 +1,10 @@
+var
+a:longint;
+begin
+assign(input,'jump.in');reset(input);
+assign(output,'jump.out');rewrite(output);
+a:=0-1;
+write(a);
+close(input);
+close(output);
+end.

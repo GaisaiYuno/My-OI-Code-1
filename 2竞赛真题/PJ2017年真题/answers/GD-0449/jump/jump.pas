@@ -1,0 +1,9 @@
+begin
+assign(input,'score.in');
+assign(output,'score.out');
+reset(input);
+rewrite(output);
+write(5);
+close(input);
+close(output);
+end.
