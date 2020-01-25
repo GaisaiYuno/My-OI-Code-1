@@ -1,9 +1,0 @@
-begin
-  assign(input,'jump.in');
-  reset(input);
-  assign(output,'jump.out');
-  rewrite(output);
-  write(86);
-  close(input);
-  close(output);
-end.

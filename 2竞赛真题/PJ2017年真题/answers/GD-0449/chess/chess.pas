@@ -1,9 +1,0 @@
-begin
-assign(input,'score.in');
-assign(output,'score.out');
-reset(input);
-rewrite(output);
-write(11);
-close(input);
-close(output);
-end.

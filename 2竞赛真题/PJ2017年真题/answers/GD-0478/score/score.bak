@@ -1,6 +1,0 @@
-var
-        a,b,c:longint;
-begin
-        readln(a,b,c);
-        writeln(a div 5+b div 10*3+c div 2);
-end.
