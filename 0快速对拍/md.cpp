@@ -14,8 +14,14 @@ int random(int l,int r){
 int main(){
 	srand(time(NULL));
 	int n=random(maxn),m=random(maxm);
-	for(int i=1;i<=n;i++) printf("%c",'a'+random(0,5));
+	printf("%d %d\n",n,m);
+	for(int i=1;i<=n;i++) printf("%c",'a'+random(0,2));
 	printf("\n");
-	for(int i=1;i<=m;i++) printf("%c",'a'+random(0,5));
+	for(int i=1;i<=m;i++){
+		int a=random(1,n),b=random(1,n),c=random(1,n),d=random(1,n);
+		if(a>b) swap(a,b);
+		if(c>d) swap(c,d);
+		printf("%d %d %d %d\n",a,b,c,d);
+	}
 }
 
