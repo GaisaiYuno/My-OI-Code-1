@@ -1,0 +1,116 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<algorithm>
+#define lson tree[p].l
+#define rson tree[p].r
+#define INF 0x3f3f3f3f
+#define maxn 100005 
+using namespace std;
+int n;
+struct node{
+	int l;
+	int r;
+	int cnt;
+	int size;
+	int val;
+	int dat;
+}tree[maxn];
+int tot=0;
+int root;
+int New(int val){
+	tree[++tot].cnt=1;
+	tree[tot].size=1;
+	tree[tot].val=val;
+	tree[tot].dat=rand();
+	return tot;
+} 
+
+void update(int p){
+	tree[p].size=tree[lson].size+tree[rson].size+tree[p].cnt;
+}
+
+void build(){
+	New(-INF);
+	New(INF);
+	root=1;
+	tree[1].r=2;
+	update(root);
+}
+
+void zig(int &p){
+	int q=tree[p].l;
+	tree[p].l=tree[q].r;
+	tree[q].r=p;
+	p=q;
+	update(tree[p].r);
+	update(p);
+}
+
+void zag(int &p){
+	int q=tree[p].r;
+	tree[p].r=tree[q].l;
+	tree[q].l=p;
+	p=q;
+	update(tree[p].l);
+	update(p);
+}
+
+void insert(int &p,int val){
+	if(p==0){
+		p=New(val);
+		return;
+	}
+	if(tree[p].val==val){
+		tree[p].cnt++;
+		update(p);
+		return;
+	}
+	if(val<tree[p].val){
+		insert(lson,val);
+		if(tree[p].dat<tree[lson].dat) zig(p);
+	}else{
+		insert(rson,val);
+		if(tree[p].dat<tree[rson].dat) zag(p);
+	}
+	update(p);
+}
+
+int get_rank_by_val(int p,int val){
+	if(p==0) return 0;
+	if(tree[p].val==val) return tree[lson].size+1;
+	else if(val<tree[p].val){
+		return get_rank_by_val(lson,val);
+	}else{
+		return tree[lson].size+tree[p].cnt+get_rank_by_val(rson,val);
+	}
+}
+
+int get_val_by_rank(int p,int rank){
+	if(p==0) return INF;
+	if(tree[lson].size>=rank) return get_val_by_rank(lson,rank);
+	if(tree[lson].size+tree[p].cnt>=rank) return tree[p].val;
+	return get_val_by_rank(rson,rank-tree[lson].size-tree[p].cnt); 
+}
+
+
+int main(){
+	long long ans=0;
+	int x,rk,low,up;
+	build();
+	scanf("%d",&n);
+	for(int i=1;i<=n;i++){
+		scanf("%d",&x);
+		insert(root,x);
+		if(i==1) ans+=x;
+		else{
+			rk=get_rank_by_val(root,x);
+			low=get_val_by_rank(root,rk-1);
+			up=get_val_by_rank(root,rk+1);
+			ans+=min(abs(x-low),abs(x-up));
+		}
+	}
+	printf("%lld\n",ans);
+}
+
