@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem maker="ccr-plus" type="TRA_0_4">
+    <source code="100" file="tao" dir="tao">
+        <language cmd="gcc -o tao tao.c -lm -static -static" time="10" file="tao.c"/>
+        <language cmd="g++ -o tao tao.cpp -lm -static -static" time="10" file="tao.cpp"/>
+        <language cmd="fpc tao.pas" time="10" file="tao.pas"/>
+    </source>
+    <task checker="fulltext" output="tao.out" time="10" input="tao.in">
+        <subtask score="10">
+            <point out="tao1.out" mem="512" time="2" in="tao1.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="tao2.out" mem="512" time="2" in="tao2.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="tao3.out" mem="512" time="2" in="tao3.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="tao4.out" mem="512" time="2" in="tao4.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="tao5.out" mem="512" time="2" in="tao5.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="tao6.out" mem="512" time="2" in="tao6.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="tao7.out" mem="512" time="2" in="tao7.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="tao8.out" mem="512" time="2" in="tao8.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="tao9.out" mem="512" time="2" in="tao9.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="tao10.out" mem="512" time="2" in="tao10.in"/>
+        </subtask>
+    </task>
+</problem>

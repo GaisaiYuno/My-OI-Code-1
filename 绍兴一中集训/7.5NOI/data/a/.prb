@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem maker="ccr-plus" type="TRA_0_4">
+    <source code="100" dir="a" file="a">
+        <language cmd="gcc -o a a.c -lm -static -O2" time="10" file="a.c"/>
+        <language cmd="g++ -o a a.cpp -lm -static -O2" time="10" file="a.cpp"/>
+        <language cmd="fpc a.pas -O2" time="10" file="a.pas"/>
+    </source>
+    <task output="a.out" time="10" checker="fulltext" input="a.in">
+        <subtask score="10">
+            <point out="1.out" time="3" mem="512" in="1.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="2.out" time="3" mem="512" in="2.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="3.out" time="3" mem="512" in="3.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="4.out" time="3" mem="512" in="4.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="5.out" time="3" mem="512" in="5.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="6.out" time="3" mem="512" in="6.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="7.out" time="3" mem="512" in="7.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="8.out" time="3" mem="512" in="8.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="9.out" time="3" mem="512" in="9.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="10.out" time="3" mem="512" in="10.in"/>
+        </subtask>
+    </task>
+</problem>

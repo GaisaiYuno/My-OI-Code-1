@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem version="1.1.0" type="TRA_0_4" maker="ccr-plus">
+    <source dir="oceanus" file="oceanus" code="100">
+        <language time="10" cmd="gcc -o oceanus oceanus.c -lm -static" file="oceanus.c"/>
+        <language time="10" cmd="g++ -o oceanus oceanus.cpp -lm -static" file="oceanus.cpp"/>
+        <language time="10" cmd="fpc oceanus.pas" file="oceanus.pas"/>
+    </source>
+    <task time="10" input="oceanus.in" output="oceanus.out" checker="fulltext">
+        <subtask score="20">
+            <point time="1" out="oceanus_X.out" in="oceanus_X.in" mem="128"/>
+            <point time="1" out="oceanus_1_1.out" in="oceanus_1_1.in" mem="128"/>
+            <point time="1" out="oceanus_1_2.out" in="oceanus_1_2.in" mem="128"/>
+            <point time="1" out="oceanus_1_3.out" in="oceanus_1_3.in" mem="128"/>
+            <point time="1" out="oceanus_1_4.out" in="oceanus_1_4.in" mem="128"/>
+            <point time="1" out="oceanus_1_5.out" in="oceanus_1_5.in" mem="128"/>
+            <point time="1" out="oceanus_1_6.out" in="oceanus_1_6.in" mem="128"/>
+            <point time="1" out="oceanus_1_7.out" in="oceanus_1_7.in" mem="128"/>
+            <point time="1" out="oceanus_1_8.out" in="oceanus_1_8.in" mem="128"/>
+        </subtask>
+        <subtask score="20">
+            <point time="1" out="oceanus_X.out" in="oceanus_X.in" mem="128"/>
+            <point time="1" out="oceanus_2_kill.out" in="oceanus_2_kill.in" mem="128"/>
+            <point time="1" out="oceanus_2_kill_2.out" in="oceanus_2_kill_2.in" mem="128"/>
+            <point time="1" out="oceanus_1_1.out" in="oceanus_1_1.in" mem="128"/>
+            <point time="1" out="oceanus_1_2.out" in="oceanus_1_2.in" mem="128"/>
+            <point time="1" out="oceanus_1_3.out" in="oceanus_1_3.in" mem="128"/>
+            <point time="1" out="oceanus_1_4.out" in="oceanus_1_4.in" mem="128"/>
+            <point time="1" out="oceanus_1_5.out" in="oceanus_1_5.in" mem="128"/>
+            <point time="1" out="oceanus_1_6.out" in="oceanus_1_6.in" mem="128"/>
+            <point time="1" out="oceanus_1_7.out" in="oceanus_1_7.in" mem="128"/>
+            <point time="1" out="oceanus_1_8.out" in="oceanus_1_8.in" mem="128"/>
+            <point time="1" out="oceanus_2_1.out" in="oceanus_2_1.in" mem="128"/>
+            <point time="1" out="oceanus_2_2.out" in="oceanus_2_2.in" mem="128"/>
+            <point time="1" out="oceanus_2_3.out" in="oceanus_2_3.in" mem="128"/>
+            <point time="1" out="oceanus_2_4.out" in="oceanus_2_4.in" mem="128"/>
+            <point time="1" out="oceanus_2_5.out" in="oceanus_2_5.in" mem="128"/>
+            <point time="1" out="oceanus_2_6.out" in="oceanus_2_6.in" mem="128"/>
+            <point time="1" out="oceanus_2_7.out" in="oceanus_2_7.in" mem="128"/>
+            <point time="1" out="oceanus_2_8.out" in="oceanus_2_8.in" mem="128"/>
+            <point time="1" out="oceanus_2_9.out" in="oceanus_2_9.in" mem="128"/>
+            <point time="1" out="oceanus_2_10.out" in="oceanus_2_10.in" mem="128"/>
+        </subtask>
+        <subtask score="20">
+            <point time="1" out="oceanus_X.out" in="oceanus_X.in" mem="128"/>
+            <point time="1" out="oceanus_3_1.out" in="oceanus_3_1.in" mem="128"/>
+            <point time="1" out="oceanus_3_2.out" in="oceanus_3_2.in" mem="128"/>
+            <point time="1" out="oceanus_3_3.out" in="oceanus_3_3.in" mem="128"/>
+            <point time="1" out="oceanus_3_4.out" in="oceanus_3_4.in" mem="128"/>
+            <point time="1" out="oceanus_3_5.out" in="oceanus_3_5.in" mem="128"/>
+            <point time="1" out="oceanus_3_6.out" in="oceanus_3_6.in" mem="128"/>
+            <point time="1" out="oceanus_3_7.out" in="oceanus_3_7.in" mem="128"/>
+        </subtask>
+        <subtask score="20">
+            <point time="1" out="oceanus_X.out" in="oceanus_X.in" mem="128"/>
+            <point time="1" out="oceanus_4_1.out" in="oceanus_4_1.in" mem="128"/>
+            <point time="1" out="oceanus_4_2.out" in="oceanus_4_2.in" mem="128"/>
+            <point time="1" out="oceanus_4_3.out" in="oceanus_4_3.in" mem="128"/>
+            <point time="1" out="oceanus_4_4.out" in="oceanus_4_4.in" mem="128"/>
+            <point time="1" out="oceanus_4_5.out" in="oceanus_4_5.in" mem="128"/>
+            <point time="1" out="oceanus_4_6.out" in="oceanus_4_6.in" mem="128"/>
+            <point time="1" out="oceanus_4_7.out" in="oceanus_4_7.in" mem="128"/>
+            <point time="1" out="oceanus_4_8.out" in="oceanus_4_8.in" mem="128"/>
+        </subtask>
+        <subtask score="20">
+            <point time="1" out="oceanus_X.out" in="oceanus_X.in" mem="128"/>
+            <point time="1" out="oceanus_5_kill.out" in="oceanus_5_kill.in" mem="128"/>
+            <point time="1" out="oceanus_5_kill_2.out" in="oceanus_5_kill_2.in" mem="128"/>
+            <point time="1" out="oceanus_3_1.out" in="oceanus_3_1.in" mem="128"/>
+            <point time="1" out="oceanus_3_2.out" in="oceanus_3_2.in" mem="128"/>
+            <point time="1" out="oceanus_3_3.out" in="oceanus_3_3.in" mem="128"/>
+            <point time="1" out="oceanus_3_4.out" in="oceanus_3_4.in" mem="128"/>
+            <point time="1" out="oceanus_3_5.out" in="oceanus_3_5.in" mem="128"/>
+            <point time="1" out="oceanus_3_6.out" in="oceanus_3_6.in" mem="128"/>
+            <point time="1" out="oceanus_3_7.out" in="oceanus_3_7.in" mem="128"/>
+            <point time="1" out="oceanus_4_1.out" in="oceanus_4_1.in" mem="128"/>
+            <point time="1" out="oceanus_4_2.out" in="oceanus_4_2.in" mem="128"/>
+            <point time="1" out="oceanus_4_3.out" in="oceanus_4_3.in" mem="128"/>
+            <point time="1" out="oceanus_4_4.out" in="oceanus_4_4.in" mem="128"/>
+            <point time="1" out="oceanus_4_5.out" in="oceanus_4_5.in" mem="128"/>
+            <point time="1" out="oceanus_4_6.out" in="oceanus_4_6.in" mem="128"/>
+            <point time="1" out="oceanus_4_7.out" in="oceanus_4_7.in" mem="128"/>
+            <point time="1" out="oceanus_4_8.out" in="oceanus_4_8.in" mem="128"/>
+            <point time="1" out="oceanus_5_1.out" in="oceanus_5_1.in" mem="128"/>
+            <point time="1" out="oceanus_5_2.out" in="oceanus_5_2.in" mem="128"/>
+            <point time="1" out="oceanus_5_3.out" in="oceanus_5_3.in" mem="128"/>
+            <point time="1" out="oceanus_5_4.out" in="oceanus_5_4.in" mem="128"/>
+            <point time="1" out="oceanus_5_5.out" in="oceanus_5_5.in" mem="128"/>
+            <point time="1" out="oceanus_5_6.out" in="oceanus_5_6.in" mem="128"/>
+            <point time="1" out="oceanus_5_7.out" in="oceanus_5_7.in" mem="128"/>
+        </subtask>
+    </task>
+</problem>

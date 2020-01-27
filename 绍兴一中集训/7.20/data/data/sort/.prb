@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem version="1.1.0" type="TRA_0_4" maker="ccr-plus">
+    <source file="sort" dir="sort" code="100">
+        <language file="sort.c" cmd="gcc -o sort sort.c -lm -static -static" time="10"/>
+        <language file="sort.cpp" cmd="g++ -o sort sort.cpp -lm -static -static -O2" time="10"/>
+        <language file="sort.pas" cmd="fpc sort.pas" time="10"/>
+    </source>
+    <task input="sort.in" output="sort.out" time="10" checker="fulltext">
+        <subtask score="10">
+            <point out="sort1.out" mem="512" time="1.5" in="sort1.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="sort10.out" mem="512" time="1.5" in="sort10.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="sort2.out" mem="512" time="1.5" in="sort2.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="sort3.out" mem="512" time="1.5" in="sort3.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="sort4.out" mem="512" time="1.5" in="sort4.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="sort5.out" mem="512" time="1.5" in="sort5.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="sort6.out" mem="512" time="1.5" in="sort6.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="sort7.out" mem="512" time="1.5" in="sort7.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="sort8.out" mem="512" time="1.5" in="sort8.in"/>
+        </subtask>
+        <subtask score="10">
+            <point out="sort9.out" mem="512" time="1.5" in="sort9.in"/>
+        </subtask>
+    </task>
+</problem>
