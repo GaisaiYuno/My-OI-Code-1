@@ -96,7 +96,7 @@ int find_rbound(int c,int val){
 	int mid,ans=l;
 	while(l<=r){
 		mid=(l+r)>>1;
-		if(St.query(rk[c],mid)>=val){
+		if(St.query(rk[c]+1,mid)>=val){
 			ans=mid;
 			l=mid+1;
 		}else r=mid-1;
@@ -143,6 +143,7 @@ struct persist_segment_tree{
 		}
 	}
 	int Query(int pl,int pr,int vl,int vr){
+//		if(vl==vr) return 0;
 		//查询数组从[pl,pr]处于[vl,vr]中的值的数量 
 //		printf("d:%d\n",query(root[pr],vl,vr,0,n));
 //		printf("d:%d\n",query(root[pl-1],vl,vr,0,n));
@@ -162,6 +163,7 @@ bool check(int mid,int a,int b,int c,int d){
 int get_ans(int a,int b,int c,int d){
 	int l=0,r=min(b-a+1,d-c+1);
 	int mid,ans=l;
+	check(1,a,b,c,d);
 	while(l<=r){
 		mid=(l+r)>>1;
 		if(check(mid,a,b,c,d)){
@@ -185,8 +187,8 @@ int main(){
 	} 
 }
 /*
-5 5
-aaaaa
-1 5 1 1
+7 3
+cccbbba
+3 6 3 4
 */ 
 

@@ -2,98 +2,109 @@
 #include<cstdio>
 #include<cstring>
 #include<vector>
+#include<algorithm> 
+#define maxn 2000
+#define maxl 2000000
+#define maxs 26
 using namespace std;
-struct Trie {
-	vector<int>E[maxl+5];
-	bool vis[maxl+5];
-	char ch[maxl+5][maxc+1];
-	int sz=0;
-	inline void add_edge(int u,int v) {
-		E[u].push_back(v);
-		E[v].push_back(u);
-	}
-	void insert(char *s,int type) {
-		int n=strlen(s+1);
-		int x=0;
-		if(type==1) {
-			for(int i=1; i<=n; i++) {
-				char c=s[i]-'a';
-				if(!ch[x][c]) {
-					ch[x][c]=++sz;
-					add_edge(x,sz);
-				}
-				x=ch[x][c];
-				vis[x]=1;
-			}
-		}else{
-			for(int i=n; i>=1; i--) {
-				char c=s[i]-'a';
-				if(!ch[x][c]) {
-					ch[x][c]=++sz;
-					add_edge(x,sz);
-				}
-				x=ch[x][c];
-				vis[x]=1;
-			}
-		}
-
-	}
-} Tpre,Tsuf;
-
-struct persist_segment_tree{
-#define lson(x) (tree[x].ls)
-#define rson(x) (tree[x].rs) 
-	struct node{
-		int ls;
-		int rs;
-		int cnt;
-	}tree[maxl*maxlogn+5];
-	int root[maxl+5];
-	int ptr;
-	inline void push_up(int x){
-		tree[x].cnt=tree[lson(x)].cnt+tree[rson(x)].cnt;
-	} 
-	void insert(int &x,int last,int val,int l,int r){
-		x=++ptr;
-		tree[x]=tree[last];
-		if(l==r){
-			tree[x].cnt++;
-			return;
-		}
-		int mid=(l+r)>>1;
-		if(val<=mid) insert(lson(x),lson(last),val,l,mid);
-		else insert(rson(x),rson(last),val,mid+1,r);
-		push_up(x);
-	}
-	int query(int x,int L,int R,int l,int r){
-		if(L<=l&&R>=r) return tree[x].cnt;
-		int mid=(l+r)>>1;
-		int ans=0;
-		if(L<=mid) ans+=query(lson(x),L,R,l,mid);
-		if(R>mid) ans+=query(rson(x),L,R,mid+1,r);
-		return ans;
-	}
-}Tval;
-
-struct dfn_tree{
-	vector<int>* E;
-	int tim;
-	int dfnl[maxl+5],dfnr[maxl+5];
-	void ini(vector<int>* x){
-		E=x;
-	}
-	void dfs(int x,int fa){
-		dfnl[x]=++tim;
-		for(int i=0;i<E[x].size();i++){
-			int y=E[x][i];
-			if(y!=fa){
-				dfs(y,x);
-			}
-		} 
-		dfnr[x]=tim;
+inline void qread(string &s){
+	s.clear();
+	char c=getchar();
+	while(c<'a'||c>'z') c=getchar();
+	while(c>='a'&&c<='z'){
+		s.push_back(c);
+		c=getchar();
 	}
 }
-int main() {
+int n,m;
+string in[maxn+5];
 
+struct Trie {
+	char ch[maxl+5][maxs+1];
+	int maxt[maxl+5],mint[maxl+5];//子树里字符串的最小和最大编号 
+	int ptr=0;
+	void insert(string &s,int tim) {
+		int n=s.length();
+		int x=0;
+		for(int i=1; i<=n; i++) {
+			int c=s[i-1]-'a';
+			if(!ch[x][c]) ch[x][c]=++ptr;
+			x=ch[x][c];
+			mint[x]=min(mint[x],tim);
+			maxt[x]=max(maxt[x],tim);
+		}
+	}
+	int query(string &s){
+		int n=s.length();
+		int x=0;
+		for(int i=1; i<=n; i++) {
+			int c=s[i-1]-'a';
+			if(!ch[x][c]) break; 
+			x=ch[x][c];
+		}
+		return x;
+	}
+} Tpre;
+
+struct persist_trie{
+    int root[maxn+5];
+    int sz[maxl+5];
+    int ch[maxl+5][maxs];
+    int ptr;
+    void insert(int pos,int pre,string &s){
+        int now=root[pos]=++ptr,last=root[pre];
+        int n=s.length();
+        for(int i=n;i>=1;i--){//倒序插入,这样可以匹配后缀 
+            for(int j=0;j<maxs;j++) ch[now][j]=ch[last][j];
+            int c=s[i-1]-'a';
+            ch[now][c]=++ptr;
+            now=ch[now][c];
+            last=ch[last][c];
+            sz[now]=sz[last]+1;
+        }
+    }
+    int query(int l,int r,string &s){
+        int now=root[r];
+        int last=root[l-1];
+        int len=s.length();
+        for(int i=1;i<=len;i++){
+            int c=s[i-1]-'a';
+            int cnt=sz[ch[now][c]]-sz[ch[last][c]];
+            if(cnt==0) break;
+            now=ch[now][c];
+            last=ch[last][c];
+        }
+        return sz[now]-sz[last];
+    }
+}Tnex;
+
+int main() {
+	string s1,s2;
+	scanf("%d",&n);
+	for(int i=1;i<=n;i++) qread(in[i]);
+	sort(in+1,in+1+n);
+//	printf("------");
+	for(int i=1;i<=n;i++){
+		cout<<in[i]<<endl;
+	}
+	for(int i=1;i<=n;i++){
+		Tpre.insert(in[i],i);
+		//把字符串按字典序排序后加入,这样一个前缀相同的字符串的编号是连续的 
+	}
+	for(int i=1;i<=n;i++){
+		Tnex.insert(i,i-1,in[i]);//倒用于匹配后缀 
+	}
+	scanf("%d",&m);
+	int ans=0;
+	for(int i=1;i<=m;i++){
+		qread(s1);
+		qread(s2);
+		for(int i=0;i<(int)s1.length();i++) s1[i]=(s1[i]-'a'+ans)%26+'a';
+		for(int i=0;i<(int)s2.length();i++) s2[i]=(s2[i]-'a'+ans)%26+'a'; 
+		int x,l,r;
+		x=Tpre.query(s1);
+		l=Tpre.mint[x],r=Tpre.maxt[x];//在trie上找出能与s1匹配的字符串的编号区间 
+		printf("%d\n",Tnex.query(l,r,s2));//在可持久化trie上的对应区间找出后缀匹配个数 
+	}
 }
 
