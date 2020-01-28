@@ -1,3 +1,5 @@
+
+    
 #include<iostream>
 #include<cstdio>
 #include<cstring>
@@ -20,7 +22,7 @@ int n,m;
 string in[maxn+5];
 
 struct Trie {
-	char ch[maxl+5][maxs+1];
+	int ch[maxl+5][maxs+1];
 	int maxt[maxl+5],mint[maxl+5];//子树里字符串的最小和最大编号 
 	int ptr=0;
 	void insert(string &s,int tim) {
@@ -30,7 +32,7 @@ struct Trie {
 			int c=s[i-1]-'a';
 			if(!ch[x][c]) ch[x][c]=++ptr;
 			x=ch[x][c];
-			mint[x]=min(mint[x],tim);
+			if(!mint[x]) mint[x]=tim;
 			maxt[x]=max(maxt[x],tim);
 		}
 	}
@@ -39,7 +41,7 @@ struct Trie {
 		int x=0;
 		for(int i=1; i<=n; i++) {
 			int c=s[i-1]-'a';
-			if(!ch[x][c]) break; 
+			if(!ch[x][c]) return 0; 
 			x=ch[x][c];
 		}
 		return x;
@@ -66,11 +68,11 @@ struct persist_trie{
     int query(int l,int r,string &s){
         int now=root[r];
         int last=root[l-1];
-        int len=s.length();
-        for(int i=1;i<=len;i++){
+        int n=s.length();
+        for(int i=n;i>=1;i--){
             int c=s[i-1]-'a';
             int cnt=sz[ch[now][c]]-sz[ch[last][c]];
-            if(cnt==0) break;
+            if(cnt==0) return 0;
             now=ch[now][c];
             last=ch[last][c];
         }
@@ -79,14 +81,14 @@ struct persist_trie{
 }Tnex;
 
 int main() {
+#ifdef LOCAL
+	freopen("input.txt","r",stdin);
+#endif
 	string s1,s2;
 	scanf("%d",&n);
 	for(int i=1;i<=n;i++) qread(in[i]);
 	sort(in+1,in+1+n);
 //	printf("------");
-	for(int i=1;i<=n;i++){
-		cout<<in[i]<<endl;
-	}
 	for(int i=1;i<=n;i++){
 		Tpre.insert(in[i],i);
 		//把字符串按字典序排序后加入,这样一个前缀相同的字符串的编号是连续的 
@@ -103,8 +105,13 @@ int main() {
 		for(int i=0;i<(int)s2.length();i++) s2[i]=(s2[i]-'a'+ans)%26+'a'; 
 		int x,l,r;
 		x=Tpre.query(s1);
-		l=Tpre.mint[x],r=Tpre.maxt[x];//在trie上找出能与s1匹配的字符串的编号区间 
-		printf("%d\n",Tnex.query(l,r,s2));//在可持久化trie上的对应区间找出后缀匹配个数 
+		if(x){
+			l=Tpre.mint[x],r=Tpre.maxt[x];//在trie上找出能与s1匹配的字符串的编号区间 
+			ans=Tnex.query(l,r,s2);//在可持久化trie上的对应区间找出后缀匹配个数 
+		}else ans=0;
+		printf("%d\n",ans);
 	}
 }
+
+
 
