@@ -79,4 +79,5 @@ int main(){
 		if(s[i].x<s[nex].x) ans++;
 	} 
 	printf("%d\n",ans);
+
 }
