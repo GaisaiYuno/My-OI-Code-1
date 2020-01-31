@@ -28,7 +28,12 @@ void ini_inv(int n){
 		invx[i]=invfact[i]*fact[i-1]%mod;
 	}
 }
-
+inline ll C(ll n,ll m){
+	ll ans=1;
+	for(int i=n;i>=n-m+1;i--) ans=ans*i%mod;
+	for(int i=1;i<=m;i++) ans=ans*invx[i]%mod;
+	return ans;
+}
 int n;
 struct seg{
 	int l;
@@ -50,37 +55,35 @@ void discrete(){
 	}
 }
 
-ll dp[maxn+5][maxn+5];//dp[i][j][k]表示前i个学校,第i个学校选的数在第j个区间，有k个学校在第j个区间内 
-//从[l,r]里选递增的k个数，方案C(r-l+1,k) 
-//dp[i][j][k]=dp[i-1][j][k]+dp[i-1][j][k-1]*C(r-l+1,k)/C(r-l+1,k-1) (组合数部分化简成(r-l+1-k)/k) 
-//dp[i][j][1]=dp[i-1][j][1]+dp[i-1][x][y] (0<=x<=j-1,0<=y<=i-1) dp[i-1][x][y]用前缀和优化
-//第一维可以滚动数组 
+ll dp[maxn+5][maxn+5];//dp[i][j]表示前i个数,第i个数在j及之后区间内的方案数
+					 //枚举放在第j个区间里的个数,dp[i][j]+=dp[k-1][j+1]*C 
+
 ll sum[maxn+5];
-//sum[i][j]=sigma(dp[x][y][z]) (x<=i,y<=j,z<=x)
-//同样第一维滚动数组 
-int cnt[maxn+5];//记录当前第j个区间里的数,这样枚举k的时候就只用枚举到j 
+
 int main(){
 	ini_inv(maxn);
 	scanf("%d",&n);
-	for(int i=1;i<=n;i++) scanf("%d %d",&a[i].l,&a[i].r);
+	ll all=1; 
+	for(int i=1;i<=n;i++){
+		scanf("%d %d",&a[i].l,&a[i].r);
+		all=all*(a[i].r-a[i].l+1)%mod;
+	} 
 	discrete();
-	dp[0][0]=sum[0]=1;
-	for(int j=1;j<dn;j++) sum[j]=sum[j-1]+dp[j][0]; 
+	for(int j=1;j<=dn;j++) dp[0][j]=1;
 	for(int i=1;i<=n;i++){
 		for(int j=a[i].l;j<a[i].r;j++){
-			cnt[j]++;
-			for(int k=cnt[j];k>=2;k--){//倒序循环，防止重复更新 
-				dp[j][k]+=(dp[j][k-1]*(tmp[j+1]-tmp[j]-k)%mod*invx[k]%mod);
-				dp[j][k]%=mod; 
-			} 
-			dp[j][1]+=sum[j-1]*(tmp[j+1]-tmp[j])%mod;
-			dp[j][1]%=mod;
+			for(int k=i;k>0;k--){
+				if(j<a[k].l||j>=a[k].r) break;
+				dp[i][j]+=dp[k-1][j+1]*C(i-k+tmp[j+1]-tmp[j],i-k+1)%mod;
+				//插板法,把n个物品分成m份,允许有空,C(n+m-1,m)
+				//也就是说把r-l+1分成i-k+1份,再加上l,就可以保证在[l,r]内 
+				dp[i][j]%=mod;
+			}
 		}
-		for(int j=1;j<dn;j++){
-			ll tot=0;
-			for(int k=1;k<=cnt[j];k++) tot=(tot+dp[j][k])%mod;
-			sum[j]=(sum[j-1]+tot)%mod;
+		for(int j=dn-1;j>=1;j--){
+			dp[i][j]+=dp[i][j+1];
+			dp[i][j]%=mod;
 		}
 	}
-	printf("%lld\n",(sum[dn-1]-1+mod)%mod);//去掉没有人的情况 
+	printf("%lld\n",dp[n][1]*inv(all)%mod);
 }
