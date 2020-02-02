@@ -12,8 +12,14 @@
 
 *.c
 
+*.txt
+
+*.mp4
+
 tj.cpp
+
+result.html
 
 /6个人博客/装饰
 
-*.txt
+
