@@ -69,6 +69,9 @@ int main(){
 		all=all*(a[i].r-a[i].l+1)%mod;
 	} 
 	discrete();
+	for(int i=1;i<=n;i++){
+		printf("[%d,%d]\n",a[i].l,a[i].r);
+	} 
 	for(int j=1;j<=dn;j++) dp[0][j]=1;
 	for(int i=1;i<=n;i++){
 		for(int j=a[i].l;j<a[i].r;j++){
