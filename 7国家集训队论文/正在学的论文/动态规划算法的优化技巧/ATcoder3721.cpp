@@ -49,7 +49,7 @@ void add_edge(int u,int v) {
 }
 
 struct node {
-	ll f[3];
+	ll f[3];//一个三元组存储dp值 
 	node() {
 
 	}
@@ -64,15 +64,15 @@ struct node {
 };
 vector<node>v[maxn+5];
 int id[maxn+5];
-void merge(int x,int y) {
+void merge(int x,int y) {//启发式合并节点 
 	if(v[id[x]].size()<v[id[y]].size()) swap(id[x],id[y]);
 	x=id[x];
 	y=id[y];
 	int nx=v[x].size()-1,ny=v[y].size()-1;
 	for(int i=0; i<=ny; i++) {
 		ll sum0,sum1,sum2=0;
-		int tx=nx-i,ty=ny-i;
-		sum0=v[x][tx][0]*v[y][ty][0]%mod;
+		int tx=nx-i,ty=ny-i;//注意dp数组是倒序存储的 
+		sum0=v[x][tx][0]*v[y][ty][0]%mod;//合并的dp方程见博客正文 
 		sum1=(v[x][tx][1]*v[y][ty][0]+v[x][tx][0]*v[y][ty][1])%mod;
 		for(int j=0; j<=2; j++) {
 			for(int k=2; j+k>=2; k--) {
@@ -85,14 +85,14 @@ void merge(int x,int y) {
 }
 int ptr;
 void dfs(int x) {
-	if(!head[x]) id[x]=++ptr;
+	if(!head[x]) id[x]=++ptr;//叶子节点才分配 
 	int maxd=0;
 	for(int i=head[x]; i; i=E[i].next) {
 		int y=E[i].to;
 		dfs(y);
-		if(!id[x]) id[x]=id[y];
+		if(!id[x]) id[x]=id[y];//类似长链剖分,直接继承某一个节点 
 		else {
-			maxd=max(maxd,min((int)v[id[x]].size(),(int)v[id[y]].size()));
+			maxd=max(maxd,min((int)v[id[x]].size(),(int)v[id[y]].size()));//记录一下距x的最大深度，方便转移 
 			merge(x,y);
 		}
 
@@ -102,7 +102,7 @@ void dfs(int x) {
 		v[id[x]][nx-i][0]=(v[id[x]][nx-i][0]+v[id[x]][nx-i][2])%mod;
 		v[id[x]][nx-i][2]=0;
 	}
-	v[id[x]].push_back(node(inv2,inv2,0));
+	v[id[x]].push_back(node(inv2,inv2,0));//加入当前节点的状态 
 }
 int main() {
 	int f;
